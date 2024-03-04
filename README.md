@@ -1,4 +1,4 @@
-# equinox
+# Equinox
 
 A new Flutter project.
 
