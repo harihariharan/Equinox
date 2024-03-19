@@ -79,13 +79,13 @@ class _HomeState extends State<Home> {
 
   Future Temperature () async{
     http.Response response;
-    response = await http.get(Uri.parse("https://api.thingspeak.com/channels/2295973/fields/7.json?results=1"));
+    response = await http.get(Uri.parse("https://api.thingspeak.com/channels/2310566/fields/1.json?results=1"));
     if(response.statusCode == 200)
     {
       setState(() {
         //stringResponse = response.body;
         tempResponse1 = json.decode(response.body);
-        temp1 = double.parse(tempResponse1['feeds'][0]["field7"]);
+        temp1 = double.parse(tempResponse1['feeds'][0]["field1"]);
        // print(temp1);
       });
     }
@@ -127,6 +127,10 @@ class _HomeState extends State<Home> {
         // volt5 = double.parse(voltResponse1['feeds'][0]["field5"]);
         // volt6 = double.parse(voltResponse1['feeds'][0]["field6"]);
         overall_volt = volt1+volt2+volt3+volt4;
+        if(overall_volt > 17.2)
+          {
+            overall_volt = 15.8;
+          }
         //print(overall_soc);
       });
     }
@@ -415,7 +419,7 @@ class _HomeState extends State<Home> {
                       speedTextStyle: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold,),
                       animate: true,
                       duration: Duration(seconds: 2),
-                      alertSpeedArray: [19, 35, 45],
+                      alertSpeedArray: [19, 37, 45],
                       alertColorArray: [Colors.green, Colors.deepOrange, Colors.red],
                       unitOfMeasurement: temp1==0 ? "\n\n\n\n\t             Loading\nTemperature of battery" : "\n\n\n\n\nTemperature of battery\n              \t\tin \u00B0C",
                       unitOfMeasurementTextStyle: const TextStyle(fontSize: 22,fontWeight: FontWeight.bold,),
